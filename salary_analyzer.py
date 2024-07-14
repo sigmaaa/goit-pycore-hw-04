@@ -3,6 +3,7 @@ This module provides functionality to calculate the total and average salary fro
 The CSV file is expected to have the salary in the second column (index 1).
 """
 from pathlib import Path
+from decimal import Decimal, InvalidOperation
 import csv
 
 CSV_SALARY_INDEX = 1
@@ -16,7 +17,7 @@ def total_salary(path):
     path (str): The path to the CSV file.
 
     Returns:
-    tuple[float, float]: A tuple containing the total salary and the average salary.
+    tuple[Decimal, Decimal]: A tuple containing the total salary and the average salary.
 
     Raises:
     FileNotFoundError: If the file does not exist.
@@ -37,7 +38,7 @@ def calculate_total_salary_from_csv_file(path):
     path (Path): The Path object for the CSV file.
 
     Returns:
-    tuple[float, float]: A tuple containing the total salary and the average salary.
+    tuple[Decimal, Decimal]: A tuple containing the total salary and the average salary.
 
     Raises:
     IndexError: If a row in the CSV does not have enough columns.
@@ -52,16 +53,16 @@ def calculate_total_salary_from_csv_file(path):
             if len(row) < 2:
                 raise IndexError(f"Row {row} does not contain enough columns.")
             try:
-                salary = float(row[CSV_SALARY_INDEX])
-            except ValueError as exc:
+                salary = Decimal(row[CSV_SALARY_INDEX])
+            except InvalidOperation as exc:
                 raise ValueError(f"Cannot convert {
-                                 row[CSV_SALARY_INDEX]} to a float.") from exc
+                                 row[CSV_SALARY_INDEX]} to a Decimal.") from exc
 
             salaries.append(salary)
             total_salary_result += salary
 
     if not salaries:
-        return (0, 0)
+        return (Decimal('0'), Decimal('0'))
 
     average_salary = total_salary_result / len(salaries)
     return (total_salary_result, average_salary)
