@@ -44,7 +44,7 @@ def calculate_total_salary_from_csv_file(path):
     IndexError: If a row in the CSV does not have enough columns.
     ValueError: If a salary value cannot be converted to an integer.
     """
-    total_salary_result = 0
+    total_salary_result = Decimal('0')
     salaries = []
 
     with path.open(mode="r", encoding="UTF-8") as fr:
