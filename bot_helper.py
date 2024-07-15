@@ -1,3 +1,14 @@
+"""
+This module provides a simple command-line assistant bot to manage a contacts list.
+The bot supports the following commands:
+- add <name> <phone>: Adds a new contact with the given name and phone number.
+- phone <name>: Retrieves the phone number for the given contact name.
+- change <name> <new_phone>: Changes the phone number for the given contact name.
+- all: Displays all contacts in the contacts list.
+- hello: Greets the user.
+- close/exit: Exits the assistant bot.
+"""
+
 def parse_input(user_input):
     """
     Parse user input into command and arguments.
@@ -100,7 +111,8 @@ def main():
         if command in ["close", "exit"]:
             print("Good bye!")
             break
-        elif command == "hello":
+
+        if command == "hello":
             print("How can I help you?")
         elif command == "add":
             print(add_contact(args, contacts))
