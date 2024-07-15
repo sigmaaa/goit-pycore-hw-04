@@ -25,7 +25,6 @@ def add_contact(args, contacts):
     """
     if len(args) != 2:
         return "Error: Add command requires exactly 2 arguments (name and phone)."
-    
     name, phone = args
     contacts[name] = phone
     return "Contact added."
@@ -60,7 +59,6 @@ def change_contact(args, contacts):
     """
     if len(args) != 2:
         return "Error: Change command requires exactly 2 arguments (name and new phone)."
-    
     name, new_phone = args
     old_phone = contacts.get(name)
     if old_phone is not None:
@@ -81,11 +79,11 @@ def show_all(contacts):
     """
     if not contacts:
         return "No contacts found."
-    
-    result = "{:<15} {:<15}".format("Name", "Phone Number")
+    result = "\n" + "-" * 30 + "\n"
+    result += f"{'Name':<15} {'Phone Number':<15}\n"
     result += "\n" + "-" * 30 + "\n"
     for name, phone in contacts.items():
-        result += "{:<15} {:<15}".format(name, phone)
+        result += f"{name:<15} {phone:<15}\n"
         result += "\n"
     return result
 
